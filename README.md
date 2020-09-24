@@ -1,2 +1,8 @@
 # Marquilly_et_al_2020
 Statistical analyses for the article by Marquilly et al., 2020.
+
+Comparison of control, Df/+, ko/+, int/+, RNAi/+ and int+UAS:
+``R CMD BATCH R_commands_multiple_Fisher``
+
+Comparison of UAS, UAS/int and +UAShtt:
+``R CMD BATCH R_commands_multiple_Fisher3``
