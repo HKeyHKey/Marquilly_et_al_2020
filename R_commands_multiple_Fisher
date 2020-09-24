@@ -1,0 +1,26 @@
+genotype=c('ctrl','Df/+','ko/+','int/+','RNAi/+','int+UAS')
+mutant_MB=c(22,0,2,2,6,19)
+normal_MB=c(119,102,100,105,166,101)
+data=cbind(mutant_MB,normal_MB)
+
+global_chisq=chisq.test(data)$p.value
+global_fisher=fisher.test(data,workspace=1e8)$p.value
+result=list(c("Chi-square","Fisher's exact test"),c(global_chisq,global_fisher))
+names(result)=c('Test','p-value')
+write.csv(as.data.frame(result),'Global_test_results.csv')
+
+pairwise_chisq=c()
+pairwise_fisher=c()
+for (g in 1:length(genotype))
+{
+pairwise_chisq=append(pairwise_chisq,chisq.test(rbind(data[1,],data[g,]))$p.value)
+pairwise_fisher=append(pairwise_fisher,fisher.test(rbind(data[1,],data[g,]))$p.value)
+}
+
+result=list(genotype,mutant_MB,normal_MB,pairwise_chisq,p.adjust(pairwise_chisq,method='bonferroni'),p.adjust(pairwise_chisq,method='fdr'))
+names(result)=c("Genotype","mutant MB","normal MB","Chi-square test uncorrected p-value","Chi-square test p-value (Bonferroni-corrected)","Chi-square test p-value (FDR-corrected)")
+write.csv(as.data.frame(result),'Pairwise_Chi-square_test_results.csv')
+
+result=list(genotype,mutant_MB,normal_MB,pairwise_fisher,p.adjust(pairwise_fisher,method='bonferroni'),p.adjust(pairwise_fisher,method='fdr'))
+names(result)=c("Genotype","mutant MB","normal MB","Fisher's exact test uncorrected p-value","Fisher's exact test p-value (Bonferroni-corrected)","Fisher's exact test p-value (FDR-corrected)")
+write.csv(as.data.frame(result),'Pairwise_Fisher_test_results.csv')
