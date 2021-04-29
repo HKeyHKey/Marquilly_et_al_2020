@@ -1,5 +1,5 @@
 # Marquilly_et_al_2020
-Statistical analyses for the article by Marquilly et al., 2020.
+Statistical analyses for the article by [Marquilly et al., 2020](https://journals.plos.org/plosgenetics/article?id=10.1371/journal.pgen.1009287).
 
 Comparison of control, Df/+, ko/+, int/+, RNAi/+ and int+UAS (figure 1E):
 
